@@ -2,7 +2,7 @@
 
 ## Steps to clone
 
-- Run `npx create-next-app . --ts --tailwind --app --src-dir --import-alias @`
+- Run `npx create-next-app . --ts --tailwind --app --src-dir` to create a new Next.js project with all the necessary dependencies
 - Run `npm install pg zod`
 - Install [PostgreSQL and CLI](https://www.postgresql.org/download/)
 - Run `createdb custom-auth` to create a Postgres database
