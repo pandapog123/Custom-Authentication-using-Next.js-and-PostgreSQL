@@ -2,8 +2,9 @@
 
 ## Steps to clone
 
-- Run `npx create-next-app . --ts --tailwind --app --src-dir` to create a new Next.js project with all the necessary dependencies
+- Run `npx create-next-app . --ts --tailwind --app --src-dir` to create a new Next.js project with "@" import alias and all the necessary dependencies
 - Run `npm install pg zod`
+- Run `npm i --save-dev @types/pg`
 - Install [PostgreSQL and CLI](https://www.postgresql.org/download/)
 - Run `createdb custom-auth` to create a Postgres database
 - Run `psql custom-auth` and then run this SQL command to create the users table:

@@ -1,24 +1,24 @@
+import { cookies } from "next/headers";
+import { getUser } from "@/auth";
 import { redirect } from "next/navigation";
-import { z } from "zod";
+import Form from "./Form";
 
-const signupSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().email(),
-  password: z.string().min(8),
-});
+export default async function Signup() {
+  let user: any;
 
-export default function Signup() {
-  async function signupAction(formData: FormData) {
-    "use server";
+  try {
+    let tokenCookie = cookies().get("token")?.value;
 
-    try {
-      const result = signupSchema.parse(Object.fromEntries(formData));
-    } catch (error) {
-      return {
-        test: "test",
-      };
+    if (!tokenCookie) {
+      throw new Error();
     }
 
+    user = await getUser(tokenCookie);
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (user) {
     redirect("/account");
   }
 
@@ -38,55 +38,9 @@ export default function Signup() {
           <p className="text-zinc-400">
             Sign up and your information will be stored.
           </p>
-
-          <Test />
         </header>
 
-        <form
-          action={signupAction}
-          method="post"
-          className="flex flex-col gap-4"
-        >
-          <div className="flex flex-col gap-3">
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter your name"
-              required
-              className="bg-zinc-900 border border-zinc-800 p-2 rounded"
-            />
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              required
-              className="bg-zinc-900 border border-zinc-800 p-2 rounded"
-            />
-
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password"
-              required
-              className="bg-zinc-900 border border-zinc-800 p-2 rounded"
-            />
-          </div>
-
-          <button
-            className="
-              bg-white 
-              text-black 
-              p-2 
-              rounded-md 
-              transition 
-              hover:opacity-80 
-              focus:outline-2 focus:outline-sky-400 focus:outline-offset-2 focus:outline"
-            tabIndex={-1}
-          >
-            Sign up
-          </button>
-        </form>
+        <Form />
       </main>
     </div>
   );
