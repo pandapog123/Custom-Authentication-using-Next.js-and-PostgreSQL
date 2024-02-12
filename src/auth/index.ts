@@ -19,7 +19,7 @@ export async function createUser(formData: FormData) {
   try {
     // Create user record
     await client.query(
-      "INSERT INTO users (uid, name, email, password) VALUES ($1::text, $2::text, $3::text, $4::text)",
+      "INSERT INTO users (uid, name, email, password) VALUES ($1::text, $2::text, $3::text, $4::text);",
       [crypto.randomUUID(), data.name, data.email, data.password]
     );
 
@@ -87,7 +87,7 @@ export async function createSession(formData: FormData) {
 
     // Create session
     await client.query(
-      "INSERT INTO sessions (token, uid) VALUES ($1::text, $2::text)",
+      `INSERT INTO sessions (token, uid) VALUES ($1::text, $2::text);`,
       [token, userID]
     );
 
