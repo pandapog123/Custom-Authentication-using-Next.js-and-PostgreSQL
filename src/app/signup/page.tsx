@@ -2,6 +2,11 @@ import { cookies } from "next/headers";
 import { getUser } from "@/auth";
 import { redirect } from "next/navigation";
 import Form from "./Form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign up",
+};
 
 export default async function Signup() {
   let user: any;
