@@ -1,4 +1,4 @@
-# Custom Authentication using JavaScript and PostgreSQL
+# Custom Authentication using Next.js and PostgreSQL
 
 ## Steps to clone
 
